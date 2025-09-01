@@ -1,0 +1,61 @@
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: text-editor-mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password123
+      MONGO_INITDB_DATABASE: texteditor
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongodb_data:/data/db
+      - ./mongo-init:/docker-entrypoint-initdb.d
+    networks:
+      - text-editor-network
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: text-editor-server
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+      - MONGODB_URI=mongodb://admin:password123@mongodb:27017/texteditor?authSource=admin
+    ports:
+      - "3001:3001"
+    depends_on:
+      - mongodb
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+    networks:
+      - text-editor-network
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: text-editor-client
+    restart: unless-stopped
+    environment:
+      - VITE_API_URL=http://server:3001
+    ports:
+      - "3000:3000"
+    depends_on:
+      - server
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    networks:
+      - text-editor-network
+
+volumes:
+  mongodb_data:
+
+networks:
+  text-editor-network:
+    driver: bridge
