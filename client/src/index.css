@@ -1,0 +1,258 @@
+@import "tailwindcss";
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgb(29, 26, 26);
+  background-color: #ffffff;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.tiptap {
+  min-height: 100%;
+  padding: 2rem;
+  border-radius: 10px;
+  border: 1px solid #717171;
+}
+
+/* ProseMirror Editor Styles */
+.ProseMirror {
+  position: relative;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  white-space: break-spaces;
+  -webkit-font-variant-ligatures: none;
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0; /* the above doesn't seem to work in Edge */
+  outline: none;
+  padding: 1rem;
+  min-height: 200px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.ProseMirror pre {
+  white-space: pre-wrap;
+}
+
+.ProseMirror li {
+  position: relative;
+}
+
+.ProseMirror-hideselection *::selection {
+  background: transparent;
+}
+.ProseMirror-hideselection *::-moz-selection {
+  background: transparent;
+}
+.ProseMirror-hideselection {
+  caret-color: transparent;
+}
+
+.ProseMirror-selectednode {
+  outline: 2px solid #8cf;
+}
+
+/* ProseMirror Menubar Styles */
+.ProseMirror-menubar-wrapper {
+  border: 1px solid #ddd !important;
+  border-radius: 4px !important;
+  background: white !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.ProseMirror-menubar {
+  border-bottom: 1px solid #ddd !important;
+  background: #f8f8f8 !important;
+  padding: 8px !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 4px !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+  min-height: 40px !important;
+}
+
+.ProseMirror-menu-active {
+  background: #eee !important;
+  border-radius: 3px !important;
+}
+
+.ProseMirror-menuitem {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 2px !important;
+  padding: 4px 8px !important;
+  border: 1px solid transparent !important;
+  background: none !important;
+  cursor: pointer !important;
+  border-radius: 3px !important;
+  font-size: 14px !important;
+  line-height: 1 !important;
+  min-width: 24px !important;
+  min-height: 24px !important;
+  box-sizing: border-box !important;
+  color: #333 !important;
+  text-decoration: none !important;
+}
+
+.ProseMirror-menuitem:hover {
+  background: #eee !important;
+  border-color: #ccc !important;
+}
+
+.ProseMirror-menuitem.ProseMirror-menu-active {
+  background: #ddd !important;
+  border-color: #bbb !important;
+}
+
+.ProseMirror-menuitem[title] {
+  position: relative !important;
+}
+
+.ProseMirror-menuseparator {
+  border-right: 1px solid #ddd !important;
+  margin: 0 8px !important;
+  padding: 0 !important;
+  height: 20px !important;
+  width: 1px !important;
+  background: #ddd !important;
+}
+
+/* ProseMirror Dropdown Styles */
+.ProseMirror-menu-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.ProseMirror-menu-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  min-width: 120px;
+}
+
+.ProseMirror-menu-dropdown-item {
+  display: block;
+  padding: 0.5rem;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+}
+
+.ProseMirror-menu-dropdown-item:hover {
+  background: #f0f0f0;
+}
+
+/* ProseMirror Prompt Styles */
+.ProseMirror-prompt {
+  background: white;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1100;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.ProseMirror-prompt h5 {
+  margin: 0 0 0.5rem 0;
+}
+
+.ProseMirror-prompt input[type="text"],
+.ProseMirror-prompt textarea {
+  background: #eee;
+  border: none;
+  outline: none;
+  padding: 0.5rem;
+  border-radius: 3px;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+.ProseMirror-prompt-buttons {
+  text-align: right;
+}
+
+.ProseMirror-prompt-buttons button {
+  background: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  padding: 0.25rem 0.5rem;
+  margin-left: 0.5rem;
+  cursor: pointer;
+}
+
+.ProseMirror-prompt-buttons button:hover {
+  background: #ddd;
+}
+
+/* ProseMirror Invalid Styles */
+.ProseMirror-invalid {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* List Styles */
+.ProseMirror ul,
+.ProseMirror ol {
+  padding-left: 2rem;
+}
+
+.ProseMirror li {
+  margin: 0.25rem 0;
+}
+
+/* Blockquote Styles */
+.ProseMirror blockquote {
+  padding-left: 1rem;
+  border-left: 3px solid #ddd;
+  margin-left: 0;
+  margin-right: 0;
+  color: #666;
+}
+
+/* Code Styles */
+.ProseMirror code {
+  background: #f5f5f5;
+  padding: 0.125rem 0.25rem;
+  border-radius: 3px;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.ProseMirror pre {
+  background: #f5f5f5;
+  padding: 1rem;
+  border-radius: 3px;
+  overflow-x: auto;
+}
+
+.ProseMirror pre code {
+  background: none;
+  padding: 0;
+}
